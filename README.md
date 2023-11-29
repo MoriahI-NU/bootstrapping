@@ -25,18 +25,18 @@ bootstrap.exe contains the final application for this experiment. Upon running, 
 
 Running the application on my system resulted in the following:  
 
----------R---------
-Sample Mean: [31.964]
-Confidence Intervals: [27.059300, 37.604500] 
-tStar: [0.0634]
-tMargin: [0.1767]
-R elapsed time: 2.7199466s
----------Go---------
-Sample Mean: 31.964000
-Confidence Intervals (95%): [27.112000, 37.956000]
-tStar: 0.063366
-tMargin: 0.177238
-Go elapsed time: 1.9064ms
+---------R---------  
+Sample Mean: [31.964]  
+Confidence Intervals: [27.059300, 37.604500]  
+tStar: [0.0634]  
+tMargin: [0.1767]  
+R elapsed time: 2.7199466s  
+---------Go---------  
+Sample Mean: 31.964000  
+Confidence Intervals (95%): [27.112000, 37.956000]  
+tStar: 0.063366  
+tMargin: 0.177238  
+Go elapsed time: 1.9064ms  
 
 As you can see, the calculations between these languages give very similar results. tStar and tMargin are both within rounding error of their counterparts. The confidence intervals vary the most - although not within rounding error their results have a differrence of about 0.35 or less which is noticeable but not overly concerning.
 
