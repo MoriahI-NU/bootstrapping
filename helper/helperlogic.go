@@ -91,7 +91,9 @@ func CalculateTStar(alpha float64, degreesOfFreedom int) float64 {
 		Nu:    float64(degreesOfFreedom),
 	}
 	criticalValue := tDist.Quantile(1 - alpha/2)
-	return criticalValue
+
+	roundedcriticalValue := math.Round(criticalValue*1000) / 1000
+	return roundedcriticalValue
 }
 
 func CalculateStandardDeviation(data []float64) float64 {
@@ -103,7 +105,12 @@ func CalculateStandardDeviation(data []float64) float64 {
 	}
 
 	variance := sum / float64(len(data)-1)
-	return math.Sqrt(variance)
+
+	stdev := math.Sqrt(variance)
+
+	roundedstdev := math.Round(stdev*1000) / 1000
+
+	return roundedstdev
 }
 
 ///////////////Helper functions for R////////////////////
