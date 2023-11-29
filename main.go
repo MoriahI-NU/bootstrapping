@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"runtime"
 	"sort"
 	"time"
 )
@@ -22,6 +23,8 @@ func main() {
 	// Run R script
 	R_results := helper.RunR("MustangPrice.csv")
 
+	var memStats runtime.MemStats
+
 	// Print results
 	fmt.Println("Sample Mean:", R_results.Sample_Mean)
 	fmt.Print("Confidence Intervals: ")
@@ -35,6 +38,10 @@ func main() {
 	//end R timer
 	r_elapsed_time := time.Since(start_time)
 	fmt.Print("R elapsed time: ", r_elapsed_time, "\n")
+
+	runtime.ReadMemStats(&memStats)
+	R_bytes := memStats.TotalAlloc
+	fmt.Print("R bytes: ", memStats.TotalAlloc, "\n")
 
 	/////////////////////////////////////////
 
@@ -82,7 +89,10 @@ func main() {
 	tMargin := tStar * helper.CalculateStandardDeviation(resamplingDistribution)
 	fmt.Printf("tMargin: %f\n", tMargin)
 
+	runtime.ReadMemStats(&memStats)
+
 	//end go timer
 	go_elapsed_time := time.Since(start_time)
 	fmt.Print("Go elapsed time: ", go_elapsed_time, "\n")
+	fmt.Print("Go bytes: ", memStats.TotalAlloc-R_bytes, "\n")
 }
